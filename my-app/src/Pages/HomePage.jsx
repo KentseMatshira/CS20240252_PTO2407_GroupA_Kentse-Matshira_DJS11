@@ -1,4 +1,11 @@
-import React, {useState, useEffect} from "react";
+/**
+ * The HomePage component fetches podcast previews and displays them using the ShowList component in a
+ * React application.
+ * @returns The `HomePage` component is being returned. It fetches previews data using the
+ * `fetchPreviews` function, displays a loading message while fetching data, and then renders a list ofAdd commentMore actions
+ * shows using the `ShowList` component once the data is loaded.
+ */
+import React, { useState, useEffect } from "react";
 import { fetchPreviews } from "../services/api";
 import ShowList from "../components/ShowList";
 
@@ -13,7 +20,7 @@ export const HomePage = () => {
         setPreviews(data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching previews:', error);
+        console.error("Error fetching previews:", error);
       }
     };
     loadPreviews();
@@ -28,6 +35,6 @@ export const HomePage = () => {
       <ShowList previews={previews} />
     </div>
   );
-  };
-  
-  export default HomePage;
+};
+
+export default HomePage;

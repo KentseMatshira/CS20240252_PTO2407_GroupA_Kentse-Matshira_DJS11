@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Navbar } from "./Pages/Navbar";
+import { Navbar } from "./Components/Navbar";
 import { HomePage } from "./pages/HomePage";
 import { FavoritesPage } from "./pages/FavoritesPage";
 import { ShowPage } from "./pages/ShowPage";

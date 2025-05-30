@@ -1,3 +1,4 @@
+/* This code snippet is a React component called `ShowPage`. Here's a breakdown of what it does: */
 import React from "react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
@@ -51,4 +52,3 @@ export const ShowPage = () => {
     </div>
   );
 };
-
