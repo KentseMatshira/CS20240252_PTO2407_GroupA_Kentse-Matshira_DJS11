@@ -5,9 +5,12 @@ import './App.css'
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import { Navbar } from "./components/Navbar";
+import { HomePage } from './pages/HomePage';
+import { ShowPage } from './pages/ShowPage';
+import { FavoritesPage } from './pages/FavoritesPage';
+ 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Router>
@@ -19,8 +22,8 @@ function App() {
         </Routes>
       </Router>
     </>
- );
+  );
 };
 
 
-export default App
+export default App;
