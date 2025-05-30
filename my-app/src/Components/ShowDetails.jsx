@@ -1,20 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { fetchShowDetails } from '../services/api';
+import { fetchShow } from "../services/api";
 import { genreMap } from '../utils/genreMapper';
-import { AudioPlayerContext } from '../contexts/AudioPlayerContext';
 
-const ShowDetails = () => {
-    const { id } = useParams();
+
+export const ShowDetails = () => {
+  const { id } = useParams();
   const [show, setShow] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(0);
-  const { playAudio } = useContext(AudioPlayerContext);
-
+  
   React.useEffect(() => {
-    const loadShowDetails = async () => {
-      const data = await fetchShowDetails(id);
+    const loadShow = async () => {
+        const data = await fetchShow(id);
       setShow(data);
     };
-    loadShowDetails();
+    loadShow();
   }, [id]);
 
   const handleSeasonChange = (event) => {
@@ -43,17 +42,19 @@ const ShowDetails = () => {
       <div className="flex flex-col lg:flex-row items-start bg-gray-100 rounded-lg shadow-lg p-6 gap-6">
         {/* Show Image */}
         <img
-            src={show.image}
-            alt={show.title}
-            className="w-full lg:w-1/3 rounded-lg shadow-md object-cover"
+          src={show.image}
+          alt={show.title}
+          className="w-full lg:w-1/3 rounded-lg shadow-md object-cover"
         />
-         {/* Show Info */}
-         <div className="w-full lg:w-2/3">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">{show.title}</h1>
+        {/* Show Info */}
+        <div className="w-full lg:w-2/3">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            {show.title}
+          </h1>
           <p className="text-gray-600 mb-4">{show.description}</p>
           <p className="text-gray-800 mb-4">
-            <strong>Genres:</strong>{' '}
-            {show.genres.map((id) => genreMap[id]).join(', ')}
+            <strong>Genres:</strong>{" "}
+            {show.genres.map((id) => genreMap[id]).join(", ")}
           </p>
 
           {/* Season Selector */}
@@ -83,7 +84,12 @@ const ShowDetails = () => {
                   key={index}
                   className="flex justify-between items-center p-2 border rounded-md bg-white shadow-sm"
                 >
-                  <span className="text-gray-800">{episode.title}</span>
+                  {/* Favorites Button */}
+                  <button className="mt-4 bg-yellow-500 text-white px-6 py-2 rounded-md shadow-md hover:bg-yellow-600">
+                    Add to Favorites
+                  </button>
+                  <span className="text-gray-800">{episode.title}</span>Add
+                  commentMore actions
                   <button
                     onClick={() => handlePlay(episode.audioUrl)}
                     className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
@@ -94,14 +100,9 @@ const ShowDetails = () => {
               ))}
             </ul>
           </div>
-
-          {/* Favorites Button */}
-          <button className="mt-4 bg-yellow-500 text-white px-6 py-2 rounded-md shadow-md hover:bg-yellow-600">
-            Add to Favorites
-          </button>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 
