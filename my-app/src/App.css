@@ -1,52 +1,338 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+:root {
+  --primary-dark: #0b090a;
+  --secondary-dark: #161a1d;
+  --accent: #ba181b;
+  --text-color: #f5f3f4;
 }
 
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
 }
 
-main {
-  margin-top: 4rem; /* Adjust based on navbar height */
-  padding: 1rem;
+/* Loader */
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  background: radial-gradient(circle closest-side, var(--accent) 94%, #0000)
+    right/calc(200% - 1em) 100%;
+  animation: l24 1s infinite alternate linear;
+  margin-inline: auto;
+  margin-top: 7em;
+}
+.loader::before {
+  content: "Loading...";
+  line-height: 1em;
+  color: #0000;
+  background: inherit;
+  background-image: radial-gradient(
+    circle closest-side,
+    var(--text-color) 94%,
+    #000
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes l24 {
+  100% {
+    background-position: left;
+  }
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  background-color: var(--primary-dark);
+  border-bottom: 1px solid var(--text-color);
+}
+
+.heart-icon {
+  width: 2em;
+  margin-right: 0.25em;
+}
+
+.favourite-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+}
+img {
+  width: 5em;
+}
+
+.user-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--accent);
+  padding: 0.2em;
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 50%;
+}
+
+.user-icon::before {
+  content: "";
+  position: absolute;
+  width: 2.25em;
+  height: 2.25em;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
+  top: -4px;
+  right: -4px;
+}
+
+.search-input {
+  border: 2px solid;
+  height: 2em;
+  width: 14.5em;
+  border-radius: 2em;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .search-input {
+    width: 12em;
+    font-size: 0.9em;
+  }
+
+  .user-icon {
+    height: 1.2em;
+    width: 1.2em;
+  }
+
+  .podcast-card {
+    max-width: 15em;
+    height: auto;
+  }
+
+  .show-details h1,
+  h2,
+  h3 {
+    font-size: 1.5em;
+  }
+}
+
+/* General styling for mid-range screens (e.g., tablets) */
+@media (min-width: 600px) and (max-width: 768px) {
+  .search-input {
+    width: 16em;
+  }
+
+  img {
+    width: 4em;
+  }
+
+  .podcast-card {
+    max-width: 18em;
+  }
+}
+
+/* Large desktops (1024px and up) */
+@media (min-width: 1024px) {
+  .site-wrapper {
+    padding-bottom: 3em;
+  }
+}
+
+/* Specific styling for extra-large screens (1440px and up) */
+@media (min-width: 1440px) {
+  .podcast-card {
+    max-width: 22em;
+    height: 30em;
+  }
+
+  .search-input {
+    width: 26em;
+  }
+}
+
+/* Extra-wide screens (4K, 2560px and up) */
+@media (min-width: 2560px) {
+  .container {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .podcast-card {
+    max-width: 30em;
+    height: 35em;
+  }
+}
+/* Small screens (Tablets, 600px and up) */
+@media (min-width: 600px) {
+  nav {
+    padding: 1em;
+  }
+
+  img {
+    width: 6em;
+  }
+
+  .search-input {
+    width: 18em;
+  }
+
+  .user-icon {
+    height: 2em;
+    width: 2em;
+  }
+  .user-icon::before {
+    width: 2.75em;
+    height: 2.75em;
+  }
+}
+/* Medium screens (Desktops, 768px and up) */
+@media (min-width: 768px) {
+  nav {
+    padding: 1em 2em;
+  }
+
+  img {
+    width: 7em;
+  }
+
+  .search-input {
+    width: 20em;
+  }
+
+  .user-icon {
+    height: 2.5em;
+    width: 2.5em;
+  }
+  .user-icon::before {
+    width: 3.25em;
+    height: 3.25em;
+  }
+}
+
+/* Large screens (Large desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  nav {
+    padding: 1em 3em;
+    gap: 1.5em;
+  }
+
+  img {
+    width: 8em;
+  }
+
+  .search-input {
+    width: 22em;
+  }
+
+  .user-icon {
+    height: 2.75em;
+    width: 2.75em;
+  }
+
+  .user-icon::before {
+    width: 3.5em;
+    height: 3.5em;
+  }
+}
+
+/* Extra large screens (1200px and up) */
+@media (min-width: 1200px) {
+  nav {
+    padding: 1.5em 4em;
+    gap: 2em;
+  }
+
+  img {
+    width: 9em;
+  }
+
+  .search-input {
+    width: 24em;
+  }
+
+  .user-icon {
+    height: 3em;
+    width: 3em;
+  }
+
+  .user-icon::before {
+    width: 3.75em;
+    height: 3.75em;
+  }
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  flex-shrink: 0;
+  height: 5em;
+  background-color: var(--primary-dark);
+  border-top: 1px solid var(--text-color);
+}
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5em;
+}
+
+.audio-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--primary-dark);
+  color: var(--text-color);
+  border-top: 2px solid var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  z-index: 10;
+}
+
+.audio-info {
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.audio-player button {
+  background: none;
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-right: 10px; /
+}
+
+.progress-bar {
+  flex: 1;
+  height: 5px;
+  background-color: var(--secondary-dark);
+  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 5px;
 }

@@ -1,45 +1,27 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
-import { Navbar } from "./components/Navbar";
-import { HomePage } from "./pages/HomePage";
-import { FavoritesPage } from "./pages/FavoritesPage";
-import { ShowPage } from "./pages/ShowPage";
-import ShowDetails from "./components/ShowDetails";
+import Layout from "../components/layout";
+import Home from "./pages/home";
+import ShowDetails from "./pages/show";
+import EpisodeDetails from "./pages/episode";
+import Favourites from "./pages/favourite";
 
 function App() {
-  const [favorites, setFavorites] = useState([]);
-
-  const handleAddToFavorites = (episode) => {
-    if (!favorites.some((fav) => fav.id === episode.id)) {
-      setFavorites([...favorites, episode]);
-    }
-  };
-
-  const handleRemoveFromFavorites = (episodeId) => {
-    setFavorites(favorites.filter((fav) => fav.id !== episodeId));
-  };
-
   return (
-    <Router>
-      <Navbar />
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/show/:id"
-          element={<ShowDetails onAddToFavorites={handleAddToFavorites} />}
-        />
-        <Route
-          path="/favorites"
-          element={
-            <FavoritesPage
-              favorites={favorites}
-              onRemoveFromFavorites={handleRemoveFromFavorites}
-            />
-          }
-        />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/show/:id" element={<ShowDetails />} />
+          <Route
+            path="/show/:id/season/:seasonNumber/episode/:episodeId"
+            element={<EpisodeDetails />}
+          />
+          <Route path="/favourites" element={<Favourites />} />
+        </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
