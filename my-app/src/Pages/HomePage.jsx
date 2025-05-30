@@ -31,7 +31,6 @@ export const HomePage = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6">Podcasts</h1>
-
       <ShowList previews={previews} />
     </div>
   );

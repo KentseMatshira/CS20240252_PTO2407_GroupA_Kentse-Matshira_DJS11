@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Navbar } from "./Components/Navbar";
+import { Navbar } from "./components/Navbar";
 import { HomePage } from "./pages/HomePage";
 import { FavoritesPage } from "./pages/FavoritesPage";
 import { ShowPage } from "./pages/ShowPage";
@@ -22,6 +19,7 @@ function App() {
   const handleRemoveFromFavorites = (episodeId) => {
     setFavorites(favorites.filter((fav) => fav.id !== episodeId));
   };
+
   return (
     <Router>
       <Navbar />
@@ -36,10 +34,13 @@ function App() {
           element={
             <FavoritesPage
               favorites={favorites}
-              onRemoveFromFavorites={handleRemoveFromFavorites}/>}
-              />
-    </Router>
+              onRemoveFromFavorites={handleRemoveFromFavorites}
+            />
+          }
+        />
+      </Routes>
     </Router>
   );
 }
 
+export default App;
