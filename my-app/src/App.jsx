@@ -1,27 +1,37 @@
-import { useState } from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import ShowDetails from "./pages/ShowDetails";
+import Favourites from "./pages/Favourites";
 import "./App.css";
-import Layout from "../components/layout";
-import Home from "./pages/home";
-import ShowDetails from "./pages/show";
-import EpisodeDetails from "./pages/episode";
-import Favourites from "./pages/favourite";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <Link to="/" className="navbar-logo">
+            Podcast App
+          </Link>
+          <ul className="navbar-menu">
+            <li className="navbar-item">
+              <Link to="/" className="navbar-link">
+                Home
+              </Link>
+            </li>
+            <li className="navbar-item">
+              <Link to="/favourites" className="navbar-link">
+                Favourites
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/show/:id" element={<ShowDetails />} />
-          <Route
-            path="/show/:id/season/:seasonNumber/episode/:episodeId"
-            element={<EpisodeDetails />}
-          />
-          <Route path="/favourites" element={<Favourites />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/show/:id" element={<ShowDetails />} />
+        <Route path="/favourites" element={<Favourites />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
