@@ -5,7 +5,7 @@ import './App.css'
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { Navbar } from "./components/Navbar";
+import { Navbar } from "./Pages/Navbar";
 import { HomePage } from './pages/HomePage';
 import { ShowPage } from './pages/ShowPage';
 import { FavoritesPage } from './pages/FavoritesPage';
